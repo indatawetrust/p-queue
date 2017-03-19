@@ -52,8 +52,11 @@ class PQueue {
 	constructor(opts) {
 		opts = Object.assign({
 			concurrency: Infinity,
-			queueClass: PriorityQueue
+			queueClass: PriorityQueue,
+			retry: false
 		}, opts);
+		
+		this.retry = opts.retry;
 
 		if (opts.concurrency < 1) {
 			throw new TypeError('Expected `concurrency` to be a number from 1 and up');
@@ -84,8 +87,11 @@ class PQueue {
 						this._next();
 					},
 					err => {
-						reject(err);
-						this._next();
+						if (this.retry) {
+							this.add(fn, opts);
+						} else {
+							reject(err);
+						}
 					}
 				);
 			};
