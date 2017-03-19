@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Promise queue with concurrency control",
   "license": "MIT",
-  "repository": "sindresorhus/p-queue",
+  "repository": "indatawetrust/p-queue",
   "author": {
     "name": "Sindre Sorhus",
     "email": "sindresorhus@gmail.com",
